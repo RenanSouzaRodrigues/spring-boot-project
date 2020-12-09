@@ -7,26 +7,27 @@ import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
-
 // informa para o jpa que a classe é uma entidade objeto relacional. faz parte do mapeamento
 @Entity
 public class User implements Serializable  {
 	private static final long serialVersionUID = 1L;
 	
+//	definição da chave primária da entidade User
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+//	definição das demais colunas da entidade User
 	private String name;
 	private String email;
 	private String phone;
 	private String password;
 	
-	public User() {}
+	public User() {	}
 
 	public User(Long id, String name, String email, String phone, String password) {
 		super();
-		this.id = id;
+		this.id = id; // deve receber o valor null para o cadastro de um novo usuario
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
@@ -102,6 +103,11 @@ public class User implements Serializable  {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + ", password=" + password + "]";
 	}
 	
 	
