@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.renansouza.sbp.entities.Order;
 import com.renansouza.sbp.entities.User;
 import com.renansouza.sbp.repositories.UserRepository;
 
@@ -16,12 +17,21 @@ public class UserService {
 	@Autowired
 	private UserRepository repository;
 	
+	public UserRepository getRepository() {
+		return this.repository;
+	}
+	
 	public List<User> findAll() {
 		return repository.findAll();
 	}
 	
-	public User findById(Long id) {
+	public User findById(Integer id) {
 		Optional<User> user = repository.findById(id);
 		return user.get();
+	}
+	
+	public List<Order> findUserOrdersByUserId(Integer id) {
+		User user = this.findById(id);
+		return user.getOrders();
 	}
 }
