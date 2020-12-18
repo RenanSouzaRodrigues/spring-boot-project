@@ -13,7 +13,7 @@ import com.renansouza.sbp.entities.User;
 import com.renansouza.sbp.services.UserService;
 
 @RestController
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/users")
 public class UserResource {
 	
 	@Autowired
