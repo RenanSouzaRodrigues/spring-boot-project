@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Profile;
 import com.renansouza.sbp.entities.Category;
 import com.renansouza.sbp.entities.Order;
 import com.renansouza.sbp.entities.OrderItem;
+import com.renansouza.sbp.entities.Payment;
 import com.renansouza.sbp.entities.Product;
 import com.renansouza.sbp.entities.User;
 import com.renansouza.sbp.entities.enums.OrderStatus;
@@ -76,5 +77,9 @@ public class TestConfig implements CommandLineRunner{
 		OrderItem orderItem5 = new OrderItem(newOrder3, newProduct4, 2, newProduct4.getPrice());
 		
 		orderItemRepository.saveAll(Arrays.asList(orderItem1, orderItem2, orderItem3, orderItem4, orderItem5));
+		
+		Payment pay1 = new Payment(null, Instant.parse("2020-12-22T02:00:48Z"), newOrder4);
+		newOrder4.setPayment(pay1);
+		orderRepository.save(newOrder4);
 	}
 }
