@@ -2,12 +2,16 @@ package com.renansouza.sbp.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.renansouza.sbp.entities.enums.OrderStatus;
@@ -29,6 +33,9 @@ public class Order implements Serializable {
 	private User client;
 	
 	private Integer orderStatus;
+	
+	@OneToMany(mappedBy = "id.order")
+	private Set<OrderItem> orderItems = new HashSet<>(); 
 	
 	public Order() {}
 	
@@ -72,6 +79,10 @@ public class Order implements Serializable {
 	
 	public OrderStatus getOrderStatus() {
 		return OrderStatus.valueOf(this.orderStatus);
+	}
+	
+	public Set<OrderItem> getOrderitem() {
+		return this.orderItems;
 	}
 
 	@Override

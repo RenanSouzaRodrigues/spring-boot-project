@@ -8,10 +8,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import com.renansouza.sbp.entities.Category;
 import com.renansouza.sbp.entities.Order;
+import com.renansouza.sbp.entities.OrderItem;
 import com.renansouza.sbp.entities.Product;
 import com.renansouza.sbp.entities.User;
 import com.renansouza.sbp.entities.enums.OrderStatus;
 import com.renansouza.sbp.repositories.CategoryRepository;
+import com.renansouza.sbp.repositories.OrderItemRepository;
 import com.renansouza.sbp.repositories.OrderRepository;
 import com.renansouza.sbp.repositories.ProductRepository;
 import com.renansouza.sbp.repositories.UserRepository;
@@ -30,6 +32,9 @@ public class TestConfig implements CommandLineRunner{
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -63,5 +68,13 @@ public class TestConfig implements CommandLineRunner{
 		newProduct5.getCategories().add(books);
 		
 		productRepository.saveAll(Arrays.asList(newProduct1, newProduct2, newProduct3, newProduct4, newProduct5));
+		
+		OrderItem orderItem1 = new OrderItem(newOrder1, newProduct5, 2, newProduct5.getPrice());
+		OrderItem orderItem2 = new OrderItem(newOrder2, newProduct3, 2, newProduct3.getPrice());
+		OrderItem orderItem3 = new OrderItem(newOrder1, newProduct2, 2, newProduct2.getPrice());
+		OrderItem orderItem4 = new OrderItem(newOrder4, newProduct1, 2, newProduct1.getPrice());
+		OrderItem orderItem5 = new OrderItem(newOrder3, newProduct4, 2, newProduct4.getPrice());
+		
+		orderItemRepository.saveAll(Arrays.asList(orderItem1, orderItem2, orderItem3, orderItem4, orderItem5));
 	}
 }
