@@ -34,4 +34,20 @@ public class UserService {
 		User user = this.findById(id);
 		return user.getOrders();
 	}
+	
+	public User insert(User newUser) {
+		 return repository.save(newUser);
+	}
+	
+	public void delete(Integer id) {
+		repository.deleteById(id);
+	}
+	
+	public User update(Integer id, User user) {
+		User entity = repository.getOne(id);
+		entity.setName(user.getName());
+		entity.setEmail(user.getEmail());
+		entity.setPhone(user.getPhone());
+		return repository.save(entity);
+	}
 }
