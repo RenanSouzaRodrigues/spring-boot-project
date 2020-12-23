@@ -52,7 +52,7 @@ public class Order implements Serializable {
 		this.setOrderStatus(orderStatus);
 	}
 
-	public Integer getId() {
+	public Integer getId() { 
 		return id;
 	}
 
@@ -96,6 +96,14 @@ public class Order implements Serializable {
 
 	public void setPayment(Payment payment) {
 		this.payment = payment;
+	}
+	
+	public Double getTotal() {
+		Double sum = 0.0;
+		for(OrderItem item : orderItems) {
+			sum += item.getSubTotal();
+		}
+		return sum;
 	}
 
 	@Override
